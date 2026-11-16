@@ -68,3 +68,8 @@ claude plugin validate .
 ```
 
 See [CLAUDE.md](CLAUDE.md) for the rules.
+
+## License
+
+[GPL-3.0-only](LICENSE). Copyright (C) 2026 AlvaroFalcon. Projects set up with the kit keep
+their own license for their own content.

@@ -6,5 +6,12 @@
     "name": "AlvaroFalcon"
   },
   "repository": "https://github.com/AlvaroFalcon/af-ai",
-  "keywords": ["claude-md", "agents", "knowledge", "skills", "project-setup"]
+  "keywords": [
+    "claude-md",
+    "agents",
+    "knowledge",
+    "skills",
+    "project-setup"
+  ],
+  "license": "GPL-3.0-only"
 }
