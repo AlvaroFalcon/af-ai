@@ -1,0 +1,10 @@
+{
+  "name": "project-kit",
+  "version": "0.1.0",
+  "description": "Set up and maintain coordinated Claude Code work in a repo: CLAUDE.md rules and routing, per-domain knowledge files and agents, project skills, and a docs link checker.",
+  "author": {
+    "name": "AlvaroFalcon"
+  },
+  "repository": "https://github.com/AlvaroFalcon/af-ai",
+  "keywords": ["claude-md", "agents", "knowledge", "skills", "project-setup"]
+}

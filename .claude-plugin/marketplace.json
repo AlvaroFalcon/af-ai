@@ -1,0 +1,17 @@
+{
+  "name": "af-ai",
+  "owner": {
+    "name": "AlvaroFalcon"
+  },
+  "metadata": {
+    "description": "AlvaroFalcon's Claude Code plugins."
+  },
+  "plugins": [
+    {
+      "name": "project-kit",
+      "source": "./plugins/project-kit",
+      "description": "Set up and maintain coordinated Claude Code work in a repo: CLAUDE.md rules and routing, per-domain knowledge files and agents, project skills, and a docs link checker.",
+      "version": "0.1.0"
+    }
+  ]
+}
