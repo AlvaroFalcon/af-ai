@@ -54,6 +54,7 @@ Project skills live in `.claude/skills/`. Kit skills come from the `project-kit`
 | `project-kit:add-knowledge` | Record a non-obvious fact in the right knowledge file, with its source. |
 | `project-kit:new-domain` | Add a new area of expertise: knowledge file, agent and their rows here. |
 | `project-kit:new-skill` | Turn work done twice into a project skill. |
+| `project-kit:sync-agents` | Add kit catalog agents (e.g. `product`) or update the ones already imported. |
 | `project-kit:kit-audit` | Check this setup against the kit's conventions and update `scripts/check_docs.py`. |
 
 ## Commands

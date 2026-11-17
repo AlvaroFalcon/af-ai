@@ -12,6 +12,8 @@ import pytest
 KIT = Path(__file__).resolve().parent.parent
 PLUGIN = KIT / "plugins" / "project-kit"
 TEMPLATES = PLUGIN / "skills" / "init-project" / "templates"
+CATALOG = PLUGIN / "skills" / "sync-agents" / "catalog"
+MARKER = re.compile(r"^<!-- project-kit catalog: ([a-z0-9-]+) v(\d+)\. .* -->$", re.M)
 
 
 def load_checker():
@@ -173,6 +175,7 @@ def test_plugin_skills_have_matching_names_and_descriptions():
         "new-domain",
         "new-skill",
         "kit-audit",
+        "sync-agents",
     }
     for skill in skills:
         meta = frontmatter(skill)
@@ -192,3 +195,43 @@ def test_templates_referenced_by_init_exist():
     init = (PLUGIN / "skills" / "init-project" / "SKILL.md").read_text()
     for name in re.findall(r"`templates/([^`]+)`", init):
         assert (TEMPLATES / name).is_file(), name
+
+
+CATALOG_AGENTS = sorted(CATALOG.glob("*.md"))
+
+
+def test_catalog_is_not_empty():
+    assert CATALOG_AGENTS
+
+
+@pytest.mark.parametrize("agent", CATALOG_AGENTS, ids=lambda p: p.stem)
+def test_catalog_agent_format(agent: Path):
+    text = agent.read_text(encoding="utf-8")
+    meta = frontmatter(agent)
+    assert meta["name"] == agent.stem
+    assert len(meta["description"]) > 80
+    assert meta["tools"]
+    after_frontmatter = text.split("\n---\n", 1)[1]
+    marker = MARKER.match(after_frontmatter)
+    assert marker, "the marker must be the first line after the frontmatter"
+    assert marker.group(1) == agent.stem
+    assert text.count("\n## Project notes\n") == 1
+    assert "{{" not in text, "catalog agents are finished files, not templates"
+
+
+@pytest.mark.parametrize("agent", CATALOG_AGENTS, ids=lambda p: p.stem)
+def test_imported_catalog_agent_passes_checker(project: Path, agent: Path):
+    """Importing as sync-agents describes (copy + knowledge + rows) leaves the project consistent."""
+    name = agent.stem
+    (project / ".claude" / "agents" / f"{name}.md").write_text(agent.read_text())
+    claude = (project / "CLAUDE.md").read_text()
+    rows = ""
+    for cited in sorted(set(re.findall(r"`(docs/knowledge/[a-z0-9-]+\.md)`", agent.read_text()))):
+        seed = CATALOG / "knowledge" / Path(cited).name
+        assert seed.is_file() or (project / cited).exists(), f"{name} cites {cited} with no seed"
+        (project / cited).write_text(seed.read_text())
+        rows += f"| {name} | `{cited}` |\n"
+    claude = claude.replace("| API | `docs/knowledge/api.md` |\n", "| API | `docs/knowledge/api.md` |\n" + rows)
+    claude = claude.replace("| `api` | the HTTP API |", f"| `{name}` | advice | nothing |\n| `api` | the HTTP API |")
+    (project / "CLAUDE.md").write_text(claude)
+    assert load_checker().run(project) == []

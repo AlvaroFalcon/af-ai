@@ -49,13 +49,25 @@ Restart the session so the skills load.
 | `project-kit:add-knowledge` | Record a non-obvious fact in the right knowledge file, with its source, and propagate it. |
 | `project-kit:new-domain` | Add a new area: knowledge file, agent, and their rows in `CLAUDE.md` and the README. |
 | `project-kit:new-skill` | Turn a procedure done twice into a project skill. |
+| `project-kit:sync-agents` | Add ready-made agents from the kit catalog, or update the ones a project already imported (keeping its "Project notes"). |
 | `project-kit:kit-audit` | Compare a project's setup with the kit, update its `scripts/check_docs.py`, propose fixes. |
+
+### Agent catalog
+
+Besides the domain agents written for each project, the kit ships finished agents that are the
+same everywhere. `sync-agents` copies them into `.claude/agents/` and later updates them; each one
+keeps a `## Project notes` section that belongs to the project.
+
+| Agent | What it does |
+|---|---|
+| `product` | Read-only advisor: is the request worth it, does it already exist, what can be reused, what is the quick win. Reads `docs/knowledge/product.md` for users and goals. |
 
 Start a new project with: *"set up this repo with project-kit"* (the `init-project` skill).
 
 The project gets **copies** of the templates, so it keeps working without the plugin, and the kit
 never overwrites a project's own rules, knowledge or agents. After updating the plugin
-(`/plugin update project-kit`), run `kit-audit` in each project to pick up checker changes.
+(`/plugin update project-kit`), run `kit-audit` in each project to pick up checker changes and
+`sync-agents` to update catalog agents.
 
 ## Developing this repo
 

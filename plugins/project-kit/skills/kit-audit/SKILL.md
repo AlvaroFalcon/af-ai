@@ -21,6 +21,8 @@ replaced by templates; only `scripts/check_docs.py` is a kit file that may be up
 - Knowledge files: facts have sources; no contradictions; volatile facts marked; nothing that is
   really a rule for every session (that belongs in `CLAUDE.md`).
 - `scripts/check_all.sh` runs every CI step and `check_docs.py`; CI runs `check_docs.py`.
+- Catalog agents (marked `<!-- project-kit catalog: ... -->`): outdated or edited ones, and
+  catalog agents not imported yet. Fix them with `sync-agents`, not by hand.
 - Procedures repeated in recent history (`git log`) that deserve a skill (`new-skill`).
 
 ## 2. Report and propose

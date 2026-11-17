@@ -32,5 +32,6 @@ what the plugins do.
 |---|---|
 | `.claude-plugin/marketplace.json` | The marketplace (`af-ai`) listing the plugins. |
 | `plugins/project-kit/` | The project-kit plugin: `skills/*/SKILL.md`. |
+| `plugins/project-kit/skills/sync-agents/catalog/` | Ready-made agents (marker `project-kit catalog: <name> v<N>`, bump N on change) and the knowledge seeds they need. |
 | `plugins/project-kit/skills/init-project/templates/` | Files copied into projects: `CLAUDE.md`, knowledge, agents, `check_docs.py`, `check_all.sh`. |
 | `tests/` | Tests of the checker template and the manifests. |

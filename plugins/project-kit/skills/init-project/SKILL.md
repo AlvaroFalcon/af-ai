@@ -46,6 +46,8 @@ Guidelines:
 - A release/CI/packaging domain is almost always one.
 - Add a **read-only advisor** (template `advisor-agent.md`) when the project depends on outside
   expertise that is not code (a market, a regulation, a game's mechanics).
+- Offer the ready-made agents of the kit catalog (the `sync-agents` skill lists them, e.g. the
+  `product` advisor). If the owner wants them, add them in step 4 with `sync-agents`.
 - Propose the first project skills: always `check-all`; others only for procedures that already
   exist and are error-prone (version bump, migration, release dry run, screenshots).
 
