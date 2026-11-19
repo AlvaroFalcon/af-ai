@@ -6,8 +6,13 @@ Shared context for every Claude session and subagent working in this repo. Read 
 
 ## Working agreement with the owner
 
-- Flow: **research → plan → implement**, in small increments. **Present the plan and wait for the
-  owner's OK before implementing anything non-trivial.** Explain in {{OWNER_LANGUAGE}}; say what
+- Flow: **research → spec → plan → implement → verify**, in small increments, with the skill
+  `project-kit:feature`. **Wait for the owner's OK on the spec (`docs/specs/NNN-<slug>.md`) and
+  again on the plan before implementing.** Trivial changes (nothing to decide) skip the spec: a
+  short plan, OK, implement. Work too big for one spec is charted first with
+  `project-kit:wayfinder`.
+- Open questions go to the owner in rounds (`project-kit:grilling`): numbered, each with a
+  recommended answer. Facts are looked up, never asked. Explain in {{OWNER_LANGUAGE}}; say what
   something means, not just its name.
 - {{BRANCH_AND_PR_RULES}}
 - {{HOW_THE_OWNER_TESTS}}
@@ -51,6 +56,9 @@ Project skills live in `.claude/skills/`. Kit skills come from the `project-kit`
 |---|---|
 | `check-all` | Run every CI check locally with one summary. |
 {{SKILL_ROWS}}
+| `project-kit:feature` | Take a request through research → spec → plan → implement → verify. |
+| `project-kit:grilling` | Settle open decisions with the owner in rounds of questions with recommendations. |
+| `project-kit:wayfinder` | Chart work too big for one spec as a map of decision tickets on GitHub issues, and work through it. |
 | `project-kit:add-knowledge` | Record a non-obvious fact in the right knowledge file, with its source. |
 | `project-kit:new-domain` | Add a new area of expertise: knowledge file, agent and their rows here. |
 | `project-kit:new-skill` | Turn work done twice into a project skill. |

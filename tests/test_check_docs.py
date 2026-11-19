@@ -176,6 +176,9 @@ def test_plugin_skills_have_matching_names_and_descriptions():
         "new-skill",
         "kit-audit",
         "sync-agents",
+        "feature",
+        "grilling",
+        "wayfinder",
     }
     for skill in skills:
         meta = frontmatter(skill)
@@ -235,3 +238,45 @@ def test_imported_catalog_agent_passes_checker(project: Path, agent: Path):
     claude = claude.replace("| `api` | the HTTP API |", f"| `{name}` | advice | nothing |\n| `api` | the HTTP API |")
     (project / "CLAUDE.md").write_text(claude)
     assert load_checker().run(project) == []
+
+
+def test_feature_spec_template_exists():
+    feature = (PLUGIN / "skills" / "feature" / "SKILL.md").read_text()
+    assert "`spec.md`" in feature
+    spec = (PLUGIN / "skills" / "feature" / "spec.md").read_text()
+    for heading in ("Acceptance criteria", "Out of scope", "Plan", "Verification"):
+        assert f"## {heading}" in spec
+
+
+def test_flow_agents_are_in_the_catalog():
+    feature = (PLUGIN / "skills" / "feature" / "SKILL.md").read_text()
+    for agent in ("product", "researcher", "planner", "verifier"):
+        assert f"`{agent}`" in feature
+        assert (CATALOG / f"{agent}.md").is_file(), agent
+
+
+@pytest.mark.parametrize("skill", ["grilling", "wayfinder"])
+def test_adapted_skills_keep_attribution(skill: str):
+    text = (PLUGIN / "skills" / skill / "SKILL.md").read_text()
+    assert "Matt Pocock" in text and "THIRD_PARTY.md" in text
+    notice = (PLUGIN / "THIRD_PARTY.md").read_text()
+    assert "Copyright (c) 2026 Matt Pocock" in notice and "MIT License" in notice
+
+
+def test_template_claude_md_passes_checker_once_filled(tmp_path: Path):
+    """The template's own citations (spec paths, kit skills) don't trip the checker."""
+    text = (TEMPLATES / "CLAUDE.md").read_text()
+    text = re.sub(r"\{\{[A-Z_]+\}\}", "", text)
+    (tmp_path / "CLAUDE.md").write_text(text)
+    (tmp_path / "README.md").write_text("`check-all`\n")
+    (tmp_path / "scripts").mkdir()
+    (tmp_path / "scripts" / "check_all.sh").write_text("#!/bin/sh\n")
+    (tmp_path / "scripts" / "check_docs.py").write_text("")
+    (tmp_path / "docs" / "knowledge").mkdir(parents=True)
+    (tmp_path / "docs" / "knowledge" / "api.md").write_text("# Knowledge: api\n")
+    text = text.replace("| Architecture,", "| API | `docs/knowledge/api.md` |\n| Architecture,")
+    (tmp_path / "CLAUDE.md").write_text(text)
+    (tmp_path / ".claude" / "agents").mkdir(parents=True)
+    (tmp_path / ".claude" / "skills" / "check-all").mkdir(parents=True)
+    (tmp_path / ".claude" / "skills" / "check-all" / "SKILL.md").write_text(SKILL)
+    assert load_checker().run(tmp_path) == []

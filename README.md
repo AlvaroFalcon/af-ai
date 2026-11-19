@@ -7,8 +7,8 @@ Claude Code plugins for working on long projects with Claude as a coordinator of
 Sets up and maintains the structure that keeps long Claude Code projects coherent across
 sessions. It is extracted from a real project where it worked well:
 
-- **`CLAUDE.md`** holds the working agreement (research → plan → owner's OK → implement in small
-  steps), the non-negotiable rules, where each kind of knowledge lives, which agent to ask about
+- **`CLAUDE.md`** holds the working agreement (research → spec → plan → implement → verify, with
+  the owner's OK on the spec and on the plan), the non-negotiable rules, where each kind of knowledge lives, which agent to ask about
   what, and which skill to use for repeated procedures.
 - **`docs/knowledge/<domain>.md`**: facts that are not obvious from the code (measurements, API
   quirks, CI failure causes, owner decisions), one fact per bullet, each with its source.
@@ -20,6 +20,22 @@ sessions. It is extracted from a real project where it worked well:
 - **`scripts/check_docs.py`**: fails CI when knowledge files, agents or skills are not linked from
   `CLAUDE.md`, a table names something missing, or a cited path does not exist.
 - **`scripts/check_all.sh`**: every CI check locally, with one summary.
+- **`docs/specs/NNN-<slug>.md`**: one spec per change (problem, value, research, decisions,
+  acceptance criteria, plan, verification), written by the `feature` skill.
+
+### The flow
+
+```
+request ─► product: worth it? exists? reuse? quick win?
+              │
+              ├─ trivial ──────────────► short plan ─► OK ─► implement
+              ├─ fits one spec ─► research ─► grilling ─► SPEC ─► OK ─► PLAN ─► OK ─► implement ─► verify
+              └─ too big / foggy ─► wayfinder map on GitHub issues ─► one decision per session ─► spec(s) ─┘
+```
+
+`feature` runs it; `grilling` asks the owner the open questions in rounds, each with a
+recommended answer; `wayfinder` charts big efforts as a map issue with decision tickets as
+sub-issues (shown on a GitHub Project board through its auto-add workflow).
 
 ### Install
 
@@ -49,6 +65,9 @@ Restart the session so the skills load.
 | `project-kit:add-knowledge` | Record a non-obvious fact in the right knowledge file, with its source, and propagate it. |
 | `project-kit:new-domain` | Add a new area: knowledge file, agent, and their rows in `CLAUDE.md` and the README. |
 | `project-kit:new-skill` | Turn a procedure done twice into a project skill. |
+| `project-kit:feature` | Take a request through research → spec → plan → implement → verify, with the catalog agents. |
+| `project-kit:grilling` | Settle open decisions with the owner: rounds of numbered questions, each with a recommended answer. |
+| `project-kit:wayfinder` | Chart work too big for one spec as a map of decision tickets on GitHub issues, then resolve one per session. Invoked by the owner only. |
 | `project-kit:sync-agents` | Add ready-made agents from the kit catalog, or update the ones a project already imported (keeping its "Project notes"). |
 | `project-kit:kit-audit` | Compare a project's setup with the kit, update its `scripts/check_docs.py`, propose fixes. |
 
@@ -61,6 +80,12 @@ keeps a `## Project notes` section that belongs to the project.
 | Agent | What it does |
 |---|---|
 | `product` | Read-only advisor: is the request worth it, does it already exist, what can be reused, what is the quick win. Reads `docs/knowledge/product.md` for users and goals. |
+| `researcher` | Read-only: the facts a decision waits on, from the code, the docs and the web, with sources. |
+| `planner` | Read-only: turns an agreed spec into small steps, each owned by one domain agent. |
+| `verifier` | Runs the checks and verifies each acceptance criterion with evidence; never edits. |
+
+`grilling` and `wayfinder` are adapted from [mattpocock/skills](https://github.com/mattpocock/skills)
+(MIT); see [THIRD_PARTY.md](plugins/project-kit/THIRD_PARTY.md).
 
 Start a new project with: *"set up this repo with project-kit"* (the `init-project` skill).
 

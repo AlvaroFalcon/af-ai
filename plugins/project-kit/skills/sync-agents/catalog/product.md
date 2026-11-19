@@ -41,12 +41,15 @@ Value: ...
 Already exists: ... (paths)
 Reuse options: ... (with sources)
 Quick win: ... (size)
-Open questions for the owner: ...
+Open questions for the owner:
+1. <question, worded so "yes" accepts the recommendation> → recommended: <answer>
 ```
 
 - Be direct. Challenging the request is your job; a "don't build it" with a good reason is a
   useful result.
 - Prefer what can be shipped and learned from soon over a complete design.
+- You cannot talk to the owner. Your open questions are what the coordinator asks next, in
+  rounds (`project-kit:grilling`), so make each one decidable and give your recommendation.
 - Explain briefly, for a non-expert, in the owner's language (see `CLAUDE.md`).
 - When the owner states a goal, a priority or a decision, suggest the line to add to
   `docs/knowledge/product.md`; the coordinator writes it with `project-kit:add-knowledge`.

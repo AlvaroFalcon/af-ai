@@ -46,8 +46,9 @@ Guidelines:
 - A release/CI/packaging domain is almost always one.
 - Add a **read-only advisor** (template `advisor-agent.md`) when the project depends on outside
   expertise that is not code (a market, a regulation, a game's mechanics).
-- Offer the ready-made agents of the kit catalog (the `sync-agents` skill lists them, e.g. the
-  `product` advisor). If the owner wants them, add them in step 4 with `sync-agents`.
+- Offer the ready-made agents of the kit catalog (the `sync-agents` skill lists them). The flow
+  of `feature` uses `product`, `researcher`, `planner` and `verifier`; recommend all four. Add the
+  chosen ones in step 4 with `sync-agents`, which also seeds `docs/knowledge/product.md`.
 - Propose the first project skills: always `check-all`; others only for procedures that already
   exist and are error-prone (version bump, migration, release dry run, screenshots).
 
@@ -73,6 +74,20 @@ Guidelines:
    none). Don't restructure the owner's CI.
 7. README: a short "Working with Claude Code" section listing the agents and project skills
    (the checker expects each project skill name in backticks there).
+8. Catalog agents chosen in step 3: run `sync-agents` to add them.
+9. `.claude/settings.json`: declare the kit so cloud and teammates' sessions load it (merge into
+   the file if it exists; never drop existing keys):
+
+   ```json
+   {
+     "extraKnownMarketplaces": {
+       "af-ai": { "source": { "source": "github", "repo": "AlvaroFalcon/af-ai" } }
+     },
+     "enabledPlugins": { "project-kit@af-ai": true }
+   }
+   ```
+
+   The project still passes its CI without the plugin; this only makes the kit skills available.
 
 ## 5. Verify
 
