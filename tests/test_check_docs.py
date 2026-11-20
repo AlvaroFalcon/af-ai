@@ -179,6 +179,7 @@ def test_plugin_skills_have_matching_names_and_descriptions():
         "feature",
         "grilling",
         "wayfinder",
+        "create-pr",
     }
     for skill in skills:
         meta = frontmatter(skill)

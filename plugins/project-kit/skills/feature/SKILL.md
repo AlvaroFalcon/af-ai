@@ -77,4 +77,5 @@ Verification section: pass, fail or not verifiable here, with evidence. A fail g
 Then Status `done`, and tell the owner, in their language: what changed, what was verified, and
 exactly what they should test themselves.
 
-Commit on a branch and open a PR as the project's rules say; link the spec in the PR.
+Commit on a branch and open the PR with `project-kit:create-pr` (it links the spec and copies its
+acceptance criteria), unless the project's rules say otherwise.

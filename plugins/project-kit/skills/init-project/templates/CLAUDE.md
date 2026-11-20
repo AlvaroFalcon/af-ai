@@ -59,6 +59,7 @@ Project skills live in `.claude/skills/`. Kit skills come from the `project-kit`
 | `project-kit:feature` | Take a request through research → spec → plan → implement → verify. |
 | `project-kit:grilling` | Settle open decisions with the owner in rounds of questions with recommendations. |
 | `project-kit:wayfinder` | Chart work too big for one spec as a map of decision tickets on GitHub issues, and work through it. |
+| `project-kit:create-pr` | Open or update the PR with the fixed description and the spec's acceptance criteria. |
 | `project-kit:add-knowledge` | Record a non-obvious fact in the right knowledge file, with its source. |
 | `project-kit:new-domain` | Add a new area of expertise: knowledge file, agent and their rows here. |
 | `project-kit:new-skill` | Turn work done twice into a project skill. |
