@@ -67,7 +67,7 @@ Restart the session so the skills load.
 | `project-kit:new-skill` | Turn a procedure done twice into a project skill. |
 | `project-kit:feature` | Take a request through research → spec → plan → implement → verify, with the catalog agents. |
 | `project-kit:grilling` | Settle open decisions with the owner: rounds of numbered questions, each with a recommended answer. |
-| `project-kit:wayfinder` | Chart work too big for one spec as a map of decision tickets on GitHub issues, then resolve one per session. Invoked by the owner only. |
+| `project-kit:wayfinder` | Chart work too big for one spec as a map of decision tickets on GitHub issues, then resolve one per session. Started only when the owner asks for it, by name or with `/project-kit:wayfinder`. |
 | `project-kit:create-pr` | Open or update the branch's PR with a fixed description (new, changed, to test, acceptance criteria, notes), after merging the base in and running the checks; links the spec. |
 | `project-kit:sync-agents` | Add ready-made agents from the kit catalog, or update the ones a project already imported (keeping its "Project notes"). |
 | `project-kit:kit-audit` | Compare a project's setup with the kit, update its `scripts/check_docs.py`, propose fixes. |
