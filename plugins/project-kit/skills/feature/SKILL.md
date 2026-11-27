@@ -41,7 +41,7 @@ independent questions as parallel subagents. Keep the findings with their source
    frontier is empty.
 2. Write `docs/specs/NNN-<slug>.md` from the `spec.md` next to this file (the skill's base
    directory is printed when it loads). `NNN` is the next free number; create `docs/specs/` if
-   needed. Fill Problem, Value, Research, Decisions, Acceptance criteria and Out of scope; leave
+   needed. Write it in the language `CLAUDE.md` sets for repository files. Fill Problem, Value, Research, Decisions, Acceptance criteria and Out of scope; leave
    Plan and Verification for later. Acceptance criteria are observable and checkable: what a
    user or a test can see, not how it is built.
 3. Status `draft`. Show the owner the spec (or its link) with a three-line summary.
