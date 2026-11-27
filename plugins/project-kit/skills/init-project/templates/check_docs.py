@@ -108,7 +108,9 @@ def check_agents(root: Path, claude: str) -> list[str]:
     files = {p.stem: p for p in (root / ".claude" / "agents").glob("*.md")}
     for name, path in sorted(files.items()):
         if name not in table:
-            problems.append(f"CLAUDE.md: agent `{name}` is missing from the '{AGENTS_SECTION}' table")
+            problems.append(
+                f"CLAUDE.md: agent `{name}` is missing from the '{AGENTS_SECTION}' table"
+            )
         if frontmatter_name(path) != name:
             problems.append(f"{path.relative_to(root)}: frontmatter name must be '{name}'")
     for name in sorted(table - set(files)):
