@@ -11,7 +11,7 @@
       "name": "project-kit",
       "source": "./plugins/project-kit",
       "description": "Set up and maintain coordinated Claude Code work in a repo: a research, spec, plan, implement, verify flow (with wayfinder maps on GitHub issues for big efforts), CLAUDE.md rules and routing, per-domain knowledge files and agents, project skills, a catalog of ready-made agents, and a docs link checker.",
-      "version": "0.2.1"
+      "version": "0.2.0"
     }
   ]
 }

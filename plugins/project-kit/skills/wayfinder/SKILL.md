@@ -1,6 +1,7 @@
 ---
 name: wayfinder
-description: Plan a chunk of work too big or too foggy for one session as a shared map of decision tickets on GitHub issues (a map issue with sub-issues, shown on a GitHub Project board), then resolve them one per session until the way to the destination - usually a spec - is clear. Use only when the owner explicitly asks for wayfinder or for a map: with a loose idea to chart, or with a map to work through ("work through the map <link>"). Never start a map on your own initiative.
+description: Plan a chunk of work too big or too foggy for one session as a shared map of decision tickets on GitHub issues (a map issue with sub-issues, shown on a GitHub Project board), then resolve them one per session until the way to the destination - usually a spec - is clear. Use when the owner invokes it with a loose idea to chart, or with a map to work through.
+disable-model-invocation: true
 ---
 
 # wayfinder
