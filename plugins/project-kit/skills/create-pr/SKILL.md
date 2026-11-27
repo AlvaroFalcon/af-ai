@@ -30,11 +30,12 @@ branch**: the PR is how work reaches it.
 7. **One PR per branch.** If an open PR exists for the branch, update its body instead of opening
    a second one. A merged or closed PR is never reused.
 8. **Open the PR** against the base with a short imperative title and the body below, in the
-   owner's language (see `CLAUDE.md`). Give the owner the full PR link and offer to watch it.
+   language `CLAUDE.md` sets for GitHub text (if it sets none, the owner's language). Give the
+   owner the full PR link and offer to watch it.
 
 ## Description template
 
-Section titles go in the owner's language; the order and content stay the same. In English:
+Section titles go in that same language; the order and content stay the same. In English:
 
 ```markdown
 ## What's new

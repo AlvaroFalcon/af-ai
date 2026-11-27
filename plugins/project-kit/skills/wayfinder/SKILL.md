@@ -26,6 +26,9 @@ do the work is the signal that you have reached the edge of the map: hand off to
 (Plan → Implement → Verify). The map's **Notes** may override this and carry execution into the
 map.
 
+Issues and comments go in the language `CLAUDE.md` sets for GitHub text; talk to the owner in
+theirs.
+
 ## Refer by name
 
 In everything the owner reads, refer to a map or ticket by its **title**, with the link inside
